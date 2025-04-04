@@ -63,7 +63,9 @@ func runInitCommand() error {
 			if input == "" {
 				return fmt.Errorf("username cannot be empty")
 			}
-			fmt.Printf("Debug - Username entered: '%s'\n", input)
+			if !utils.IsValidGitHubUsername(input) {
+				return fmt.Errorf("invalid GitHub username format (only letters, numbers, hyphens, underscores allowed)")
+			}
 			return nil
 		},
 	}
@@ -89,17 +91,8 @@ func runInitCommand() error {
 		utils.Info("Using single directory structure")
 	}
 
-	promptRepoName := promptui.Prompt{
-		Label:   "Repository Name",
-		Default: "dotfiles",
-	}
-
-	repoName, err := promptRepoName.Run()
-	if err != nil {
-		return fmt.Errorf("failed to get repository name: %w", err)
-	}
-
-	config.CurrentConfig.DotfilesRepo = repoName
+	// Always use "dotfiles" as the repository name
+	config.CurrentConfig.DotfilesRepo = "dotfiles"
 
 	promptLocalPath := promptui.Prompt{
 		Label:   "Local Path",

@@ -16,7 +16,7 @@ var (
 		Short: "dfmgr - A dotfiles manager",
 		Long: `dfmgr is a powerful dotfiles manager that helps you manage, share, and synchronize your configuration files across multiple machines.
 It uses GNU stow for symlinking and integrates with GitHub for easy sharing and collaboration.`,
-		Version: "0.1.0",
+		Version: "0.2.0",
 	}
 )
 
@@ -44,5 +44,5 @@ func printLogo() {
 ╚═════╝ ╚═╝     ╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═╝
 `
 	fmt.Fprintf(os.Stderr, "%s\n", color.GreenString(logo))
-	fmt.Fprintf(os.Stderr, "%s\n", color.CyanString("dotfiles manager - v0.1.0"))
+	fmt.Fprintf(os.Stderr, "%s\n", color.CyanString("dotfiles manager - v0.2.0"))
 } 

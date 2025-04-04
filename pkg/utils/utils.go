@@ -5,7 +5,6 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
-	"regexp"
 	"strings"
 
 	"github.com/fatih/color"
@@ -107,9 +106,23 @@ func BackupFile(filePath string, backupDir string) (string, error) {
 }
 
 func IsValidGitHubUsername(username string) bool {
-	pattern := `^[a-zA-Z0-9](?:[a-zA-Z0-9]|-(?=[a-zA-Z0-9])){0,38}$`
-	matched, _ := regexp.MatchString(pattern, username)
-	return matched
+	// Only check that it's not empty and doesn't contain spaces or special characters
+	// that would make Github repository names invalid
+	if username == "" {
+		return false
+	}
+	
+	// Just ensure basic characters - letters, numbers, hyphens and underscores
+	for _, c := range username {
+		isAlphaNumeric := (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')
+		isValidSpecial := c == '-' || c == '_'
+		
+		if !isAlphaNumeric && !isValidSpecial {
+			return false
+		}
+	}
+	
+	return true
 }
 
 func FileExtension(filename string) string {
