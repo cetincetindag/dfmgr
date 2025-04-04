@@ -63,9 +63,7 @@ func runInitCommand() error {
 			if input == "" {
 				return fmt.Errorf("username cannot be empty")
 			}
-			if !utils.IsValidGitHubUsername(input) {
-				return fmt.Errorf("invalid GitHub username format")
-			}
+			fmt.Printf("Debug - Username entered: '%s'\n", input)
 			return nil
 		},
 	}
