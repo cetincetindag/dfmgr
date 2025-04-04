@@ -107,8 +107,8 @@ func BackupFile(filePath string, backupDir string) (string, error) {
 }
 
 func IsValidGitHubUsername(username string) bool {
-	pattern := `^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$`
-	matched, _ := regexp.MatchString(pattern, strings.ToLower(username))
+	pattern := `^[a-zA-Z0-9](?:[a-zA-Z0-9]|-(?=[a-zA-Z0-9])){0,38}$`
+	matched, _ := regexp.MatchString(pattern, username)
 	return matched
 }
 
