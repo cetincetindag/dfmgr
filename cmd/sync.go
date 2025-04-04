@@ -138,6 +138,7 @@ func runSyncCommand(paths []string) error {
 	
 	if successCount > 0 {
 		utils.Success("Successfully synced %d files/directories to your dotfiles repository", successCount)
+		utils.Info("Remember to run 'dfmgr apply' to create symlinks for the new files")
 	} else {
 		return fmt.Errorf("failed to sync any files")
 	}

@@ -4,14 +4,12 @@ A powerful, easy-to-use dotfiles manager written in Go. Simplify the management,
 
 ## Features
 
-- Colorful and well-styled command line interface
+- Colorful command line interface
 - Interactive setup process
 - Multi-OS support to manage dotfiles for different operating systems
-- Automatic OS detection
 - GitHub integration for easy sharing and collaboration
 - GNU stow integration for symlinking
 - Backup and restore functionality
-- Extensive dotfiles database
 
 ## Installation
 
@@ -25,7 +23,7 @@ A powerful, easy-to-use dotfiles manager written in Go. Simplify the management,
 ### Installing from Source
 
 ```bash
-go install github.com/cetince/dfmgr@latest
+go install github.com/cetincetindag/dfmgr@latest
 ```
 
 ## Getting Started
@@ -49,13 +47,14 @@ This will guide you through:
 To clone and apply someone else's dotfiles:
 
 ```bash
-dfmgr clone username
+dfmgr clone {github_username}
 ```
+The user specified must have a public repository named 'dotfiles' that includes a dfmgr config file.
 
 Use the `-s` or `--selective` flag to interactively choose which configurations to apply:
 
 ```bash
-dfmgr clone -s username
+dfmgr clone -s {github_username}
 ```
 
 ### Fork Dotfiles
@@ -63,7 +62,7 @@ dfmgr clone -s username
 To fork someone else's dotfiles repository and make it your own:
 
 ```bash
-dfmgr fork username
+dfmgr fork {github_username} 
 ```
 
 ### Manage Your Dotfiles
@@ -80,6 +79,27 @@ Fetch the latest changes from GitHub:
 dfmgr fetch
 ```
 
+### Adding New Configuration Files
+
+When you set up a new application or tool that creates configuration files:
+
+1. Save the configuration files to your dotfiles repository using the sync command:
+   ```bash
+   dfmgr sync ~/.config/newapp
+   ```
+
+2. Apply the changes to create the necessary symlinks:
+   ```bash
+   dfmgr apply
+   ```
+
+3. Push your changes to GitHub to make them available on your other machines:
+   ```bash
+   dfmgr push
+   ```
+
+Always run `dfmgr apply` after adding each new configuration file to create the required symlinks.
+
 ## Command Reference
 
 | Command | Description |
@@ -92,6 +112,8 @@ dfmgr fetch
 | `dfmgr fetch` | Pull the latest changes from your dotfiles repository |
 | `dfmgr sync [file_paths...]` | Add configuration files to your dotfiles repository |
 | `dfmgr sync -o [file_paths...]` | Add and automatically organize files by category |
+| `dfmgr apply` | Create symlinks for dotfiles in your repository |
+| `dfmgr apply -s` | Selectively choose which dotfiles to apply |
 
 ## FAQ
 
