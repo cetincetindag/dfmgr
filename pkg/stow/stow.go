@@ -171,7 +171,8 @@ func ApplyDotfiles(interactive bool) error {
 			indices := strings.Split(input, ",")
 			for _, idx := range indices {
 				idx = strings.TrimSpace(idx)
-				if i, err := fmt.Sscanf(idx, "%d", new(int)); err == nil && i > 0 && i <= len(packages) {
+				var i int
+				if _, err := fmt.Sscanf(idx, "%d", &i); err == nil && i > 0 && i <= len(packages) {
 					selectedPackages = append(selectedPackages, packages[i-1])
 				}
 			}

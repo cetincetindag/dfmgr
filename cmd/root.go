@@ -23,6 +23,12 @@ It uses GNU stow for symlinking and integrates with GitHub for easy sharing and 
 func init() {
 	cobra.OnInitialize(initConfig)
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.dfmgr)")
+	rootCmd.PersistentPreRun = func(cmd *cobra.Command, args []string) {
+		// Only print logo for main commands, not for help or completion
+		if cmd.Name() != "completion" && cmd.Name() != "help" {
+			printLogo()
+		}
+	}
 }
 
 func initConfig() {
@@ -30,7 +36,6 @@ func initConfig() {
 }
 
 func Execute() error {
-	printLogo()
 	return rootCmd.Execute()
 }
 
